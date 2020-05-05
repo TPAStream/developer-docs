@@ -7,17 +7,27 @@ REST API
 Authentication
 --------------
 
-TPA Stream's REST API supports Basic Authentication over HTTPS using your API Key.
+TPA Stream's REST API supports Basic Authentication over HTTPS using your Secret API Key.
 
-To implement, simply put your user name (email address) and API key in the Authorization header on each API request.
+To implement, simply put your user name (email address) and Secret API key in the Authorization header on each API request.
 
-**Your API key is a Secret Password! Do not share this key with anyone.**
+**Your API key is a Secret Password! Do not share this key with anyone, including TPA Stream. TPA Stream will NEVER ask for your Secret API Key.**
 
 A simple example using curl:
 
 .. code-block:: bash
 
     curl -L --user me@example.com:MY_API_KEY https://app.tpastream.com/api/claims
+
+--------
+Security
+--------
+
+For additional security, you must provide an IP CIDR address range. This range may be :code:`0.0.0.0/0`,
+meaning no restriction, however we HIGHLY recommend a more restrictive address range to provide
+an extra layer of security in addition to your Secret API Key. This range can be provided on the
+`Manage Users <https://app.tpastream.com/settings/users>`_ page under Settings.
+
 
 -------------------
 API Response Format
