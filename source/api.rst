@@ -94,7 +94,7 @@ Note that since date of service can span over multiple days
 
     *In the text form of a range, an inclusive lower bound is represented by "[" while an exclusive lower bound is represented by "(". Likewise, an inclusive upper bound is represented by "]", while an exclusive upper bound is represented by ")"*
 
-    -- For more details and examples, please consult the PostgreSQL documentation https://www.postgresql.org/docs/9.6/static/rangetypes.html#RANGETYPES-INCLUSIVITY
+    -- For more details and examples, please consult the PostgreSQL documentation https://www.postgresql.org/docs/12/static/rangetypes.html#RANGETYPES-INCLUSIVITY
 
 ------------------------------------
 Filtering and Paging Through Results
