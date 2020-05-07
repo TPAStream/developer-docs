@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = "TPA Stream Developer Toolkit"
-copyright = "2020, TPA Stream"
+copyright = f'{dt.datetime.now():%Y} TPA Stream, Inc. All rights reserved.'
 author = "TPA Stream"
 master_doc = 'index'
 
@@ -55,7 +55,6 @@ html_static_path = ["_static"]
 html_theme_path = [alabaster.get_path()]
 html_show_sourcelink = False
 templates_path = ["_templates"]
-copyright = f'{dt.datetime.now():%Y} TPA Stream, Inc.'
 
 html_theme_options = {
     "logo": "tpastream-logo-hori-RGB.179x33.png",
@@ -67,4 +66,5 @@ html_theme_options = {
     },
     "github_repo": "TPAStream/developer-docs",
     "github_banner": True,
+    "show_powered_by": False,
 }
