@@ -17,6 +17,10 @@ Claim Webhook URL
 
 To edit the claim webhook URL, click on "Account Settings" on the settings page.
 
+..  image:: account-settings.png
+   :align: center
+   :width: 700
+
 Note that you will only see this setting if the claim webhook feature is enabled.
 
 Once the webhook URL has been updated, all future posts will go to that URL.
@@ -25,12 +29,50 @@ Once the webhook URL has been updated, all future posts will go to that URL.
 Replaying a Claim Post
 **********************
 
+..  image:: replay-claim-webhook.png
+   :align: center
+   :width: 400
+
 To manually replay a claim post, find the appropriate claim on the claims page
 and click the "Replay webhook" button.  If the button is not shown, please
 verify that the webhook feature is enabled and a URL is set as described above.
 This "replay" functionality is useful for testing, and can also be used to
 trigger a webhook for any pre-existing claims that are in the system, if desired.
 
+------------------------------
+First Crawl Completion Webhook
+------------------------------
+
+TPA Stream also offers a crawl webhook feature that posts details about the
+first crawl of a policyholder to a customer-provided endpoint. It will
+POST this information after all the claims for the crawl have been processed.
+The last POST for a policy holder will occur when the crawl is successful for
+the first time. For example, if the first two crawls fail and next two attempts
+are successful, 3 POST requests will be made.  Two for the failures and a
+third, final POST for the first success.
+
+**********************************
+First Crawl Completion Webhook URL
+**********************************
+
+To edit the first crawl completion webhook URL, click on "Account Settings"
+on the settings page similar to editing the claim webhook URL.
+
+*********************************
+Replaying a Crawl Completion Post
+*********************************
+
+..  image:: replay-crawl-webhook.png
+   :align: center
+   :width: 500
+
+To manually replay a first completion webhook post, find the appropriate member
+on the member page.  Under policy holders, there will be a button to replay
+the webhook request.  If the button is not shown, please verify that the
+webhook feature is enabled and a URL is set as described above. This “replay”
+functionality is useful for testing.  If a crawl for that policy holder has
+not happened yet, it will return a failure. Note that the replay will not have
+:code:`crawl_claim_ids` and will not be retried upon failure.
 
 ---------------
 Request Retries
@@ -66,9 +108,9 @@ at https://jwt.io. Note that the JWT library you choose must support RS256
 (nearly all of them do), and should also support an exp check (although you could
 easily perform this simple expiration date check yourself using a UTC timestamp).
 
---------------------
-Example JSON Request
---------------------
+----------------------------------
+Example Claim Webhook JSON Request
+----------------------------------
 
 
 .. code-block:: json
@@ -187,3 +229,24 @@ Example JSON Request
       }
    }
 
+----------------------------------
+Example Crawl Webhook JSON Request
+----------------------------------
+
+
+.. code-block:: json
+
+   {
+       "data": {
+           "crawl_claim_ids": [
+               10004,
+               10007,
+               10008
+           ],
+           "member_ids": [
+               97990
+           ],
+           "policy_holder_id": 155564,
+           "success": true
+       }
+   }
