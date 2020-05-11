@@ -58,7 +58,8 @@ CDN Example
             el: '#react-hook',
             employer: {
                 systemKey: 'some-system-key',
-                vendor: 'Internal',
+                vendor: 'internal',
+                name: 'some-name'
             },
             user: {
                 firstName: 'Joe', 
@@ -90,14 +91,17 @@ The SDK currently supports the following parameters:
 
 * :code:`el` (This is where the SDK will render: Note -> This is a ‘css selector’)
 * :code:`employer`
-* :code:`systemKey`
-* :code:`vendor` (This will usually be 'Internal')
+
+    * :code:`systemKey`
+    * :code:`vendor` (This will usually be 'internal')
+    * :code:`name`
 * :code:`user`
-* :code:`firstName`
-* :code:`lastName`
-* :code:`email`
-* :code:`memberSystemKey`
-* :code:`phoneNumber`
+
+    * :code:`firstName`
+    * :code:`lastName`
+    * :code:`email`
+    * :code:`memberSystemKey`
+    * :code:`phoneNumber`
 * :code:`apiToken`
 * :code:`realTimeVerification` -> Bool
 * :code:`isDemo` -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
@@ -113,7 +117,7 @@ The SDK currently supports the following parameters:
   * :code:`payer`
   * :code:`policyHolder`
   * :code:`user`
-  * :code:`Tenant`
+  * :code:`tenant`
 * :code:`handleFormErrors` *
 
   * :code:`error`
