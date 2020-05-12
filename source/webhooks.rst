@@ -236,17 +236,19 @@ Example Crawl Webhook JSON Request
 
 .. code-block:: json
 
-   {
-       "data": {
-           "crawl_claim_ids": [
-               10004,
-               10007,
-               10008
-           ],
-           "member_ids": [
-               97990
-           ],
-           "policy_holder_id": 155564,
-           "success": true
-       }
-   }
+
+    {
+        "data": {
+            "members": [
+                {
+                    "id": 63167
+                }
+            ],
+            "policy_holder": {
+                "id": 189162,
+                "login_correction_message": "The login information you provided for Anthem is invalid. Please re-enter your login information.",
+                "login_problem": "invalid"
+            },
+            "success": false
+        }
+    }
