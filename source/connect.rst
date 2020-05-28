@@ -35,11 +35,11 @@ NPM Example
 
 .. code-block:: javascript
 
-    npm i easyenrollsdk
+    npm i stream-connect-sdk
  
-    import TPAStream_EasyEnroll from 'easyenrollsdk';
+    import StreamConnect from 'stream-connect-sdk';
    
-    const sdk = TPAStream_EasyEnroll({
+    const sdk = StreamConnect({
         el: '#react-hook',
         isDemo: true
     });
@@ -52,7 +52,7 @@ CDN Example
 
     <script src="https://app.tpastream.com/static/js/sdk.js"></script>
     <script>
-        window.TPAStream_EasyEnroll({
+        window.StreamConnect({
             el: '#react-hook',
             employer: {
                 systemKey: 'some-system-key',
