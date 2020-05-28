@@ -1,19 +1,202 @@
-.. _webhooks:
+.. _connect:
+
+..................
+TPA Stream Connect
+..................
+
+Client Library
+==============
+
+*****
+Usage
+*****
+
+The purpose for using the JavaScript SDK provides a seamless enrollment
+experience for members. While other methods such as SAML2 SSO to simplify
+the enrollment experience work well,  as opposed to other methods of
+enrollment (such as SAML2 SSO), is to provide a more seamless enrollment
+experience for Members.
+
+This SDK is designed to implement the EasyEnrollment platform into our
+clients own hosted web-portals. We want to make it fit as seamlessly as
+possible with the current experience of their sites. As such, we have
+provided functionality to add callbacks to the end of each of the necessary
+flows and we are as un-opinionated as possible about the styling of the SDK's
+flow.
+
+
+*****************
+JavaScript Client
+*****************
+
+-----------
+NPM Example
+-----------
+
+.. code-block:: javascript
+
+    npm i easyenrollsdk
+ 
+    import TPAStream_EasyEnroll from 'easyenrollsdk';
+   
+    const sdk = TPAStream_EasyEnroll({
+        el: '#react-hook',
+        isDemo: true
+    });
+
+
+-----------
+CDN Example
+-----------
+.. code-block:: html
+
+    <script src="https://app.tpastream.com/static/js/sdk.js"></script>
+    <script>
+        window.TPAStream_EasyEnroll({
+            el: '#react-hook',
+            employer: {
+                systemKey: 'some-system-key',
+                vendor: 'internal',
+                name: 'some-name'
+            },
+            user: {
+                firstName: 'Joe', 
+                lastName: 'Sajor', 
+                email: 'some-email@place.com',
+                memberSystemKey: 'some-system-key',
+                phoneNumber: '333333333',
+                dateOfBirth: '11-11-1121' 
+            },
+            apiToken: 'Some Provided Key → 21poi34kjqf21j1poi1d2po', // We'll provide this.
+            realTimeVerification: true,
+            doneChoosePayer: () => {},
+            doneTermsOfService: () => {},
+            doneCreatedForm: () => {},
+            doneRealTime: () => {},
+            donePopUp: () => {},
+            doneEasyEnroll: ({ employer, payer, tenant, policyHolder, user }) => {},
+            handleFormErrors: (error, {response, request, config}) => {},
+            userSchema: {}
+        })
+    </script>
+
+
+--------------------
+Supported Parameters
+--------------------
+
+The SDK currently supports the following parameters:
+
+* :code:`el` (This is where the SDK will render: Note -> This is a ‘css selector’)
+* :code:`employer`
+
+    * :code:`systemKey`
+    * :code:`vendor` (This will usually be 'internal')
+    * :code:`name`
+* :code:`user`
+
+    * :code:`firstName`
+    * :code:`lastName`
+    * :code:`email`
+    * :code:`memberSystemKey`
+    * :code:`phoneNumber`
+* :code:`apiToken`
+* :code:`realTimeVerification` -> Bool
+* :code:`isDemo` -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
+* :code:`userSchema` (This is an object {} following react-jsonschema-form for making ui:schema)
+* :code:`doneChoosePayer` *
+* :code:`doneTermsOfService` *
+* :code:`doneCreatedForm` *
+* :code:`donePopUp` *
+* :code:`doneRealTime` *
+* :code:`doneEasyEnroll` * (Below are args passed into the func)
+
+  * :code:`employer`
+  * :code:`payer`
+  * :code:`policyHolder`
+  * :code:`user`
+  * :code:`tenant`
+* :code:`handleFormErrors` *
+
+  * :code:`error`
+  * :code:`error_parts`
+
+    * :code:`response`
+    * :code:`request`
+    * :code:`config`
+
+(Required parameters are Highlighted: Note only ‘el’ is required for demo mode)
+
+Function (() => {}) parameters are Starred*
+
+
+***************
+Android Example
+***************
+
+In Android, you can implement the JavaScript SDK by creating an html
+file in your assets folder that loads the SDK, then loading it in a
+WebView. Here's a simple example implementation in Java.
+
+.. code-block:: java
+
+  public class ViewWeb extends Activity {
+      @Override
+      public void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.webview);
+          WebView webview;
+          webview = (WebView) findViewById(R.id.webView1);
+          webview.loadUrl("file:///android_asset/stream-connect.html");
+      }
+  }
+
+
+***********
+iOS Example
+***********
+
+In iOS, you can implement the JavaScript SDK by creating a directory
+in your project ("stream-connect" in the below example), and putting an
+html file in it (index.html in the below example) that loads the SDK. You
+can then load it into a WKWebView. Here's a simple example implementation in
+Objective-C.
+
+.. code-block:: objective-c
+
+  import UIKit
+  import WebKit
+   
+  class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+
+      @IBOutlet weak var webView: WKWebView!
+      override func viewDidLoad() {
+          super.viewDidLoad()
+          webView.uiDelegate = self
+          webView.navigationDelegate = self
+          let url = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "stream-connect")!
+          webView.loadFileURL(url, allowingReadAccessTo: url)
+          let request = URLRequest(url: url)
+          webView.load(request)
+      }
+  }
+
+
 
 Webhooks
 ========
 
--------------
+*************
 Claim Webhook
--------------
+*************
 
 TPA Stream offers a claim webhook feature in which TPA Stream will post new
 claims to a customer-provided endpoint. We will POST any new claim that comes
 into TPA Stream via this webhook immediately after it is processed.
 
-*****************
+-----------------
 Claim Webhook URL
-*****************
+-----------------
 
 To edit the claim webhook URL, click on "Account Settings" on the settings page.
 
@@ -25,9 +208,9 @@ Note that you will only see this setting if the claim webhook feature is enabled
 
 Once the webhook URL has been updated, all future posts will go to that URL.
 
-**********************
+----------------------
 Replaying a Claim Post
-**********************
+----------------------
 
 ..  image:: replay-claim-webhook.png
    :align: center
@@ -39,9 +222,9 @@ verify that the webhook feature is enabled and a URL is set as described above.
 This "replay" functionality is useful for testing, and can also be used to
 trigger a webhook for any pre-existing claims that are in the system, if desired.
 
-------------------------------
+******************************
 First Crawl Completion Webhook
-------------------------------
+******************************
 
 TPA Stream also offers a crawl webhook feature that posts details about the
 first crawl of a policyholder to a customer-provided endpoint. It will
@@ -51,16 +234,16 @@ the first time. For example, if the first two crawls fail and next two attempts
 are successful, 3 POST requests will be made.  Two for the failures and a
 third, final POST for the first success.
 
-**********************************
+----------------------------------
 First Crawl Completion Webhook URL
-**********************************
+----------------------------------
 
 To edit the first crawl completion webhook URL, click on "Account Settings"
 on the settings page similar to editing the claim webhook URL.
 
-*********************************
+---------------------------------
 Replaying a Crawl Completion Post
-*********************************
+---------------------------------
 
 ..  image:: replay-crawl-webhook.png
    :align: center
@@ -74,9 +257,9 @@ functionality is useful for testing.  If a crawl for that policy holder has
 not happened yet, it will return a failure. Note that the replay will not have
 :code:`crawl_claim_ids` and will not be retried upon failure.
 
----------------
+***************
 Request Retries
----------------
+***************
 
 The request will be an HTTP POST with Content-Type header of application/json.
 An example of the JSON you can expect can be found at the end of this document.
@@ -88,13 +271,13 @@ and reacts accordingly:
 * For any other code, TPA Stream will retry POSTing with an exponential backoff delay for up to 4 hours.
 
 
---------
+********
 Security
---------
+********
 
-********************************
+--------------------------------
 TPAStream-Signature Verification
-********************************
+--------------------------------
 
 Also included in the request is a JWT signature that can be used to verify that
 the request has originated from TPA Stream, and not any other party.  This
@@ -108,9 +291,9 @@ at https://jwt.io. Note that the JWT library you choose must support RS256
 (nearly all of them do), and should also support an exp check (although you could
 easily perform this simple expiration date check yourself using a UTC timestamp).
 
-----------------------------------
+**********************************
 Example Claim Webhook JSON Request
-----------------------------------
+**********************************
 
 
 .. code-block:: json
@@ -229,9 +412,9 @@ Example Claim Webhook JSON Request
       }
    }
 
-----------------------------------
+**********************************
 Example Crawl Webhook JSON Request
-----------------------------------
+**********************************
 
 
 .. code-block:: json
