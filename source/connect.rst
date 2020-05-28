@@ -144,9 +144,8 @@ WebView. Here's a simple example implementation in Java.
       @Override
       public void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
-          setContentView(R.layout.webview);
-          WebView webview;
-          webview = (WebView) findViewById(R.id.webView1);
+          setContentView(R.layout.content);
+          WebView webview = (WebView) findViewById(R.id.webView);
           webview.loadUrl("file:///android_asset/stream-connect.html");
       }
   }
