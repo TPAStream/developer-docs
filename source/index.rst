@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-TPA Stream Developer Toolkit
-============================
+TPA Stream Developer Documentation
+==================================
 
 .. include:: about.rst.inc
 
@@ -13,10 +13,10 @@ Guide
 =====
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
-   sdk
-   webhooks
+   getting_started
+   connect
    api
 
 
