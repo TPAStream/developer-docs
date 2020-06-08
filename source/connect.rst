@@ -11,18 +11,13 @@ Client Library
 Usage
 *****
 
-The purpose for using the JavaScript SDK provides a seamless enrollment
-experience for members. While other methods such as SAML2 SSO to simplify
-the enrollment experience work well,  as opposed to other methods of
-enrollment (such as SAML2 SSO), is to provide a more seamless enrollment
-experience for Members.
+Our `JavaScript Client Library <https://github.com/TPAStream/stream-connect-js-sdk>`_
+is designed to allow users of your Web or Mobile application to connect their
+Health Insurance accounts with your Application.
 
-This SDK is designed to implement the EasyEnrollment platform into our
-clients own hosted web-portals. We want to make it fit as seamlessly as
-possible with the current experience of their sites. As such, we have
-provided functionality to add callbacks to the end of each of the necessary
-flows and we are as un-opinionated as possible about the styling of the SDK's
-flow.
+To get up and running, you can simply copy and paste the JavaScript snippets
+below, and run it in `isDemo` mode today. You can use the provided callbacks to
+customize the look, feel, and overall experience for your users.
 
 
 *****************
@@ -30,8 +25,16 @@ JavaScript Client
 *****************
 
 -----------
-NPM Example
+Source Code
 -----------
+
+You can find the source code to our JavaScript Client here:
+https://github.com/TPAStream/stream-connect-js-sdk
+
+
+-------------------------
+NPM Example (recommended)
+-------------------------
 
 .. code-block:: javascript
 
@@ -127,7 +130,7 @@ The SDK currently supports the following parameters:
 
 (Required parameters are Highlighted: Note only ‘el’ is required for demo mode)
 
-Function (() => {}) parameters are Starred*
+Function :code:`() => {}` parameters are Starred*
 
 
 ***************
