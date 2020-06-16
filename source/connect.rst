@@ -115,47 +115,47 @@ The SDK currently supports the following parameters:
     * :code:`memberSystemKey`
     * :code:`phoneNumber`
 * :code:`apiToken`
-* realTimeVerification -> Bool
-* renderChoosePayer (If this is set to false doneChoosePayer* will pass all the required methods to create your own module)
-* isDemo -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
-* userSchema (This is an object {} following react-jsonschema-form for making ui:schema)
-* doneGetSDK * (Below are args passed into the func)
+* :code:`realTimeVerification` -> Bool
+* :code:`renderChoosePayer` (If this is set to false doneChoosePayer* will pass all the required methods to create your own module)
+* :code:`isDemo` -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
+* :code:`userSchema` (This is an object {} following react-jsonschema-form for making ui:schema)
+* :code:`doneGetSDK` * (Below are args passed into the func)
 
-    * user
-    * payers
-    * tenant
-    * employer
-* doneChoosePayer * (The following params only appear when renderChoosePayer is :code:`false`)
+    * :code:`user`
+    * :code:`payers`
+    * :code:`tenant`
+    * :code:`employer`
+* :code:`doneChoosePayer` * (The following params only appear when renderChoosePayer is :code:`false`)
 
-    * streamPayers
-    * choosePayer * (The function to be called to render the next SDK step)
+    * :code:`streamPayers`
+    * :code:`choosePayer` * (The function to be called to render the next SDK step)
 
-        * payer (An obj value from streamPayers)
+        * :code:`payer` (An obj value from streamPayers)
         * Your functional call should look like :code:`choosePayer({payer: streamPayers[some_index]})`
-* doneTermsOfService *
-* doneCreatedForm *
-* donePostCredentials*
+* :code:`doneTermsOfService` *
+* :code:`doneCreatedForm` *
+* :code:`donePostCredentials` *
 
-    * params (All submitted params to our API)
-* donePopUp *
-* doneRealTime *
-* doneEasyEnroll *
+    * :code:`params` (All submitted params to our API)
+* :code:`donePopUp` *
+* :code:`doneRealTime` *
+* :code:`doneEasyEnroll` *
 
-  * employer
-  * payer
-  * policyHolder
-  * user
-  * tenant
-* handleFormErrors *
+  * :code:`employer`
+  * :code:`payer`
+  * :code:`policyHolder`
+  * :code:`user`
+  * :code:`tenant`
+* :code:`handleFormErrors` *
 
-  * error
-  * error_parts
+  * :code:`error`
+  * :code:`error_parts`
   
-    * response
-    * request
-    * config
+    * :code:`response`
+    * :code:`request`
+    * :code:`config`
 
-(Required parameters are Highlighted: Note only ‘el’ is required for demo mode)
+Note: only ‘el’ is required for demo mode
 
 Function (:code:`() => {}`) parameters are Starred*
 
