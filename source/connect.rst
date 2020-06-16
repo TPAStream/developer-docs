@@ -32,9 +32,9 @@ You can find the source code to our JavaScript Client here:
 https://github.com/TPAStream/stream-connect-js-sdk
 
 
--------------------------
+*************************
 NPM Example (recommended)
--------------------------
+*************************
 
 .. code-block:: javascript
 
@@ -48,15 +48,19 @@ NPM Example (recommended)
     });
 
 
------------
+***********
 CDN Example
------------
+***********
 .. code-block:: html
 
     <script src="https://app.tpastream.com/static/js/sdk.js"></script>
     <script>
         window.StreamConnect({
             el: '#react-hook',
+            tenant: {
+                systemKey: 'test',
+                vendor: 'internal'
+            },
             employer: {
                 systemKey: 'some-system-key',
                 vendor: 'internal',
@@ -71,10 +75,14 @@ CDN Example
                 dateOfBirth: '11-11-1121' 
             },
             apiToken: 'Some Provided Key → 21poi34kjqf21j1poi1d2po', // We'll provide this.
+            isDemo: false,
             realTimeVerification: true,
-            doneChoosePayer: () => {},
+            renderChoosePayer: true,
+            doneGetSDK: ({ user, payers, tenant, employer }) => {},
+            doneChoosePayer: ({ choosePayer, streamPayers }) => {},
             doneTermsOfService: () => {},
             doneCreatedForm: () => {},
+            donePostCredentials: ({ params }) => {},
             doneRealTime: () => {},
             donePopUp: () => {},
             doneEasyEnroll: ({ employer, payer, tenant, policyHolder, user }) => {},
@@ -91,6 +99,9 @@ Supported Parameters
 The SDK currently supports the following parameters:
 
 * :code:`el` (This is where the SDK will render: Note -> This is a ‘css selector’)
+* tenant
+    * systemKey
+    * vendor
 * :code:`employer`
 
     * :code:`systemKey`
@@ -104,33 +115,49 @@ The SDK currently supports the following parameters:
     * :code:`memberSystemKey`
     * :code:`phoneNumber`
 * :code:`apiToken`
-* :code:`realTimeVerification` -> Bool
-* :code:`isDemo` -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
-* :code:`userSchema` (This is an object {} following react-jsonschema-form for making ui:schema)
-* :code:`doneChoosePayer` *
-* :code:`doneTermsOfService` *
-* :code:`doneCreatedForm` *
-* :code:`donePopUp` *
-* :code:`doneRealTime` *
-* :code:`doneEasyEnroll` * (Below are args passed into the func)
+* realTimeVerification -> Bool
+* renderChoosePayer (If this is set to false doneChoosePayer* will pass all the required methods to create your own module)
+* isDemo -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
+* userSchema (This is an object {} following react-jsonschema-form for making ui:schema)
+* doneGetSDK * (Below are args passed into the func)
 
-  * :code:`employer`
-  * :code:`payer`
-  * :code:`policyHolder`
-  * :code:`user`
-  * :code:`tenant`
-* :code:`handleFormErrors` *
+    * user
+    * payers
+    * tenant
+    * employer
+* doneChoosePayer * (The following params only appear when renderChoosePayer is :code:`false`)
 
-  * :code:`error`
-  * :code:`error_parts`
+    * streamPayers
+    * choosePayer * (The function to be called to render the next SDK step)
 
-    * :code:`response`
-    * :code:`request`
-    * :code:`config`
+        * payer (An obj value from streamPayers)
+        * Your functional call should look like :code:`choosePayer({payer: streamPayers[some_index]})`
+* doneTermsOfService *
+* doneCreatedForm *
+* donePostCredentials*
+
+    * params (All submitted params to our API)
+* donePopUp *
+* doneRealTime *
+* doneEasyEnroll *
+
+  * employer
+  * payer
+  * policyHolder
+  * user
+  * tenant
+* handleFormErrors *
+
+  * error
+  * error_parts
+  
+    * response
+    * request
+    * config
 
 (Required parameters are Highlighted: Note only ‘el’ is required for demo mode)
 
-Function :code:`() => {}` parameters are Starred*
+Function (:code:`() => {}`) parameters are Starred*
 
 
 ***************
