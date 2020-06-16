@@ -32,9 +32,9 @@ You can find the source code to our JavaScript Client here:
 https://github.com/TPAStream/stream-connect-js-sdk
 
 
-***********
-NPM Example
-***********
+*************************
+NPM Example (recommended)
+*************************
 
 .. code-block:: javascript
 
