@@ -157,7 +157,7 @@ The SDK currently supports the following parameters:
 
 (Required parameters are Highlighted: Note only ‘el’ is required for demo mode)
 
-Function (() => {}) parameters are Starred*
+Function (:code:`() => {}`) parameters are Starred*
 
 
 ***************
