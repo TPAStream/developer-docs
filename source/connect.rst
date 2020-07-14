@@ -91,6 +91,11 @@ CDN Example
         })
     </script>
 
+As of SDK version 0.4.7 the CDN provider is now versioned and will support up to 10 minor versions behind.
+ * Importing the various versions of the SDK is handled in :code:`src` attribute on your script tag
+    * "https://app.tpastream.com/static/js/sdk.js" --> Grabs the latest version of the SDK
+    * "https://app.tpastream.com/static/js/sdk-v-<VersionNumber>.js" --> For a specific version. Examples below.
+        * "https://app.tpastream.com/static/js/sdk-v-0.4.7.js"
 
 --------------------
 Supported Parameters
@@ -210,7 +215,14 @@ Objective-C.
       }
   }
 
-
+**********
+Change Log
+**********
+---------------
+v0.4.7 (Latest)
+---------------
+    * Add versioning to the CDN provider
+    * Append version to all request headers for underlying api to read.
 
 Webhooks
 ========
