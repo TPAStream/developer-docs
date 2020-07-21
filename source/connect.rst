@@ -219,8 +219,14 @@ Objective-C.
 Change Log
 **********
 ---------------
-v0.4.7 (Latest)
+v0.4.8 (Latest)
 ---------------
+    * Add individual endpoints for the following: payer and terms of service
+    * Seperate the versions of the api and create a version manager.
+    * Drastically improve initial endpoint loadtime by bringing down less info.
+------
+v0.4.7
+------
     * Add versioning to the CDN provider
     * Append version to all request headers for underlying api to read.
 
