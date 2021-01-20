@@ -97,73 +97,16 @@ As of SDK version 0.4.7 the CDN provider is now versioned and will support up to
     * "https://app.tpastream.com/static/js/sdk-v-<VersionNumber>.js" --> For a specific version. Examples below.
         * "https://app.tpastream.com/static/js/sdk-v-0.4.7.js"
 
---------------------
-Supported Parameters
---------------------
+---------------------
+SDK Client Usage Docs
+---------------------
 
-The SDK currently supports the following parameters:
+We highly suggest taking a look at our 
+`Detailed Client-Usage Docs <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/client-usage.md#client-usage>`_ 
+on github while attempting to implement the SDK.
 
-* :code:`el` (This is where the SDK will render: Note -> This is a ‘css selector’)
-* tenant
-    * systemKey
-    * vendor
-* :code:`employer`
-
-    * :code:`systemKey`
-    * :code:`vendor` (This will usually be 'internal')
-    * :code:`name`
-* :code:`user`
-
-    * :code:`firstName`
-    * :code:`lastName`
-    * :code:`email`
-    * :code:`memberSystemKey`
-    * :code:`phoneNumber`
-* :code:`apiToken`
-* :code:`realTimeVerification` -> Bool
-* :code:`renderChoosePayer` (If this is set to false doneChoosePayer* will pass all the required methods to create your own module)
-* :code:`isDemo` -> Bool (This is recommended for sandboxing before you hook the SDK up for real)
-* :code:`userSchema` (This is an object {} following react-jsonschema-form for making ui:schema)
-* :code:`doneGetSDK` * (Below are args passed into the func)
-
-    * :code:`user`
-    * :code:`payers`
-    * :code:`tenant`
-    * :code:`employer`
-* :code:`doneChoosePayer` * (The following params only appear when renderChoosePayer is :code:`false`)
-
-    * :code:`streamPayers`
-    * :code:`choosePayer` * (The function to be called to render the next SDK step)
-
-        * :code:`payer` (An obj value from streamPayers)
-        * Your functional call should look like :code:`choosePayer({payer: streamPayers[some_index]})`
-* :code:`doneTermsOfService` *
-* :code:`doneCreatedForm` *
-* :code:`donePostCredentials` *
-
-    * :code:`params` (All submitted params to our API)
-* :code:`donePopUp` *
-* :code:`doneRealTime` *
-* :code:`doneEasyEnroll` *
-
-  * :code:`employer`
-  * :code:`payer`
-  * :code:`policyHolder`
-  * :code:`user`
-  * :code:`tenant`
-* :code:`handleFormErrors` *
-
-  * :code:`error`
-  * :code:`error_parts`
-  
-    * :code:`response`
-    * :code:`request`
-    * :code:`config`
-
-Note: only ‘el’ is required for demo mode
-
-Function (:code:`() => {}`) parameters are Starred*
-
+There you will find explanations for all of the various callbacks in the example above as well as explanations for
+the various configuration paramters.
 
 ***************
 Android Example
