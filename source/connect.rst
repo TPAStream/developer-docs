@@ -19,6 +19,9 @@ To get up and running, you can simply copy and paste the JavaScript snippets
 below, and run it in `isDemo` mode today. You can use the provided callbacks to
 customize the look, feel, and overall experience for your users.
 
+**We highly suggest taking a look at our 
+`Detailed Client-Usage Docs <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/client-usage.md#client-usage>`_ 
+on github while attempting to implement the SDK.**
 
 *****************
 JavaScript Client
