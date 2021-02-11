@@ -187,8 +187,13 @@ Claim Webhook
 *************
 
 TPA Stream offers a claim webhook feature in which TPA Stream will post new
-claims to a customer-provided endpoint. We will POST any new claim that comes
-into TPA Stream via this webhook immediately after it is processed.
+claims to a customer-provided endpoint.
+
+
+-------
+Trigger
+-------
+The claim webhook will fire whenever a new claim is processed in TPA Stream.
 
 -----------------
 Claim Webhook URL
@@ -223,12 +228,23 @@ First Crawl Completion Webhook
 ******************************
 
 TPA Stream also offers a crawl webhook feature that posts details about the
-first crawl of a policyholder to a customer-provided endpoint. It will
-POST this information after all the claims for the crawl have been processed.
-The last POST for a policy holder will occur when the crawl is successful for
-the first time. For example, if the first two crawls fail and next two attempts
-are successful, 3 POST requests will be made.  Two for the failures and a
-third, final POST for the first success.
+first crawl of a policyholder to a customer-provided endpoint.
+
+-------
+Trigger
+-------
+The first crawl completion webhook will fire after all the claims for the first
+crawl of a policyholder have been processed.  If this crawl is successful, that 
+will be the last time the webhook fires for the policyholder.  If the crawl 
+fails, the trigger will fire again on the next crawl.  This will occur until 
+a crawl has successfully completed for the policyholder.  For example, if the 
+first two crawls fail and the next two ones succeed, 3 POST requests will be 
+made.  Two for the failures and a third, final POST for the first success.
+
+Note if you create a new member and associate it with an existing carrier login,
+the system will not fire the webhook if that existing carrier login has already
+had a successful first crawl.  Even though the member is new, the system 
+reuses the existing carrier login (policyholder).
 
 ----------------------------------
 First Crawl Completion Webhook URL
