@@ -26,6 +26,14 @@ We highly suggest taking a look at our
 `Detailed Client-Usage Docs <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/client-usage.md#client-usage>`_ 
 on github while attempting to implement the SDK.
 
+********************************
+Other Useful Documentation Links
+********************************
+`Quickstart <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/quickstart.md>`_ 
+`FAQ <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/faq.md>`_ 
+`Error Documentation <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/error.md>`_ 
+`SDK Flow <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/sdk-flow.md>`_ 
+
 *****************
 JavaScript Client
 *****************
