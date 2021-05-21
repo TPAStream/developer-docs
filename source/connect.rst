@@ -30,8 +30,11 @@ on github while attempting to implement the SDK.
 Other Useful Documentation Links
 ********************************
 `Quickstart <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/quickstart.md>`_ 
+
 `FAQ <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/faq.md>`_ 
+
 `Error Documentation <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/error.md>`_ 
+
 `SDK Flow <https://github.com/TPAStream/stream-connect-js-sdk/blob/master/docs/sdk-flow.md>`_ 
 
 *****************
