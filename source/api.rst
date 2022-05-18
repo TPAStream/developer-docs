@@ -37,7 +37,10 @@ Generating an SSH Key
 To generate an SSH keypair:
 
 1. open your Terminal (on Linux/Mac) or Git Bash (Windows)
-2. Paste the following command:  `ssh-keygen`
+2. Paste the following command:
+
+    ``ssh-keygen``
+
    This creates a new SSH keypair.
 
    1. When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
