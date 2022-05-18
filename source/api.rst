@@ -29,6 +29,29 @@ an extra layer of security in addition to your Secret API Key. This range can be
 `Manage Users <https://app.tpastream.com/settings/users>`_ page under Settings.
 
 
+
+---------------------
+Generating an SSH Key
+---------------------
+
+To generate an SSH keypair:
+
+1. open your Terminal (on Linux/Mac) or Git Bash (Windows)
+2. Paste the following command:  `ssh-keygen`
+   This creates a new SSH keypair.
+
+   1. When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
+
+        ``> Enter a file in which to save the key (/home/you/.ssh/algorithm): [Press enter]``
+
+   2. At the prompt, you may enter a secure passphrase. You can leave this blank.
+
+
+        ``> Enter passphrase (empty for no passphrase): [Type a passphrase]``
+
+        ``> Enter same passphrase again: [Type passphrase again]``
+
+
 -------------------
 API Response Format
 -------------------
@@ -172,148 +195,134 @@ endpoints, however may or may not be enabled for each type of user.
     {
       "data": [
          {
-            "amount_allowed": null, 
-            "amount_billed": 4509.00, 
-            "amount_not_covered": null, 
-            "amount_paid": 487.90, 
-            "amount_paid_other": null, 
-            "check_date": null, 
-            "check_number": null, 
-            "claim_medical_id": 9999999, 
+            "amount_allowed": null,
+            "amount_billed": 4509.00,
+            "amount_not_covered": null,
+            "amount_paid": 487.90,
+            "amount_paid_other": null,
+            "check_date": null,
+            "check_number": null,
+            "claim_medical_id": 9999999,
             "claim_medical_lines": [
             {
-               "amount_allowed": 69.11, 
-               "amount_billed": 85.00, 
-               "amount_not_covered": null, 
-               "amount_paid": 0.00, 
-               "amount_paid_other": null, 
-               "claim_medical_line_id": 999999, 
-               "coinsurance_patient": 0.00, 
-               "copayment": 0.00, 
+               "amount_allowed": 69.11,
+               "amount_billed": 85.00,
+               "amount_not_covered": null,
+               "amount_paid": 0.00,
+               "amount_paid_other": null,
+               "claim_medical_line_id": 999999,
+               "coinsurance_patient": 0.00,
+               "copayment": 0.00,
                "date_of_service": {
-                  "bounds": "[)", 
-                  "end": "2016-10-26", 
+                  "bounds": "[)",
+                  "end": "2016-10-26",
                   "start": "2016-10-25"
-               }, 
-               "diagnosis_code": null, 
-               "discount": null, 
-               "patient_responsibility": null, 
-               "polymorphic__amount_allowed": null, 
-               "polymorphic__amount_billed": null, 
-               "polymorphic__amount_paid": null, 
-               "polymorphic__coinsurance_patient": null, 
-               "polymorphic__copayment": null, 
-               "polymorphic__patient_responsibility": null, 
-               "polymorphic__reduction": null, 
-               "procedure_code": null, 
-               "procedure_name": "Office/outpatient Visit, Est", 
-               "reduction": 69.11, 
-               "total_patient_responsibility": 69.11, 
+               },
+               "diagnosis_code": null,
+               "discount": null,
+               "patient_responsibility": null,
+               "procedure_code": null,
+               "procedure_name": "Office/outpatient Visit, Est",
+               "reduction": 69.11,
+               "total_patient_responsibility": 69.11,
                "vendor_system_id": "0"
             }
             ],
-            "claim_requests": [], 
-            "coinsurance_patient": 209.10, 
-            "copayment": 0.00, 
+            "claim_requests": [],
+            "coinsurance_patient": 209.10,
+            "copayment": 0.00,
             "createddate": "2017-05-28T06:47:16.361817-04:00",
             "dataobject_id": 9999,
             "date_of_service": null,
             "dependents": [
             {
-               "alegeus_key": null, 
-               "createddate": "2018-03-29T08:47:12.044480-04:00", 
-               "datapath_key": null, 
-               "email": null, 
-               "first_name": "Johnny", 
-               "generic_key": null, 
-               "id": 99999, 
-               "last_name": "Appleseed", 
-               "modifieddate": "2018-03-29T08:47:12.044480-04:00", 
-               "ssn": null, 
+               "alegeus_key": null,
+               "createddate": "2018-03-29T08:47:12.044480-04:00",
+               "datapath_key": null,
+               "email": null,
+               "first_name": "Johnny",
+               "generic_key": null,
+               "id": 99999,
+               "last_name": "Appleseed",
+               "modifieddate": "2018-03-29T08:47:12.044480-04:00",
+               "ssn": null,
                "wex_key": null
             }
             ],
             "discount": null,
-            "eob_date": null, 
-            "group_name": null, 
+            "eob_date": null,
+            "group_name": null,
             "group_number": null,
             "id": 476877,
-            "last_updated_status": "2017-05-28T06:47:16.361817-04:00", 
+            "last_updated_status": "2017-05-28T06:47:16.361817-04:00",
             "members": [
             {
-               "email": "johnny@appleseed.com", 
-               "employer_id": 99999, 
+               "email": "johnny@appleseed.com",
+               "employer_id": 99999,
                "employer": {
-                  "id": 99999, 
-                  "name": "Fruit Tree Planting Services, LLC", 
+                  "id": 99999,
+                  "name": "Fruit Tree Planting Services, LLC",
                   "reimbursement_policy": "off"
                },
 
-               "full_name": "Johnny Appleseed", 
+               "full_name": "Johnny Appleseed",
                "id": 888888
             }
-            ], 
-            "modifieddate": "2017-05-28T06:47:16.361817-04:00", 
-            "network": null, 
-            "patient_account_number": null, 
-            "patient_name": "Jimmy Appleseed", 
-            "patient_responsibility": 3959.10, 
+            ],
+            "modifieddate": "2017-05-28T06:47:16.361817-04:00",
+            "network": null,
+            "patient_account_number": null,
+            "patient_name": "Jimmy Appleseed",
+            "patient_responsibility": 3959.10,
             "policy_holder": {
-            "fullname": "Johnny Appleseed", 
+            "fullname": "Johnny Appleseed",
             "policy_holder_id": 888888
-            }, 
-            "policy_holder_fullname": "Johnny Appleseed", 
-            "policy_holder_id": 888888, 
-            "polymorphic__amount_allowed": null, 
-            "polymorphic__amount_billed": null, 
-            "polymorphic__amount_paid": null, 
-            "polymorphic__coinsurance_patient": null, 
-            "polymorphic__copayment": null, 
-            "polymorphic__patient_responsibility": null, 
-            "polymorphic__reduction": null,
-            "processed_on": "2016-10-15", 
-            "read": [], 
-            "read_all": [], 
-            "reduction": 0.00, 
-            "remarks": null, 
-            "service_provider": "Dr. Suess", 
-            "service_provider_address": null, 
-            "service_provider_billing_address": null, 
-            "service_provider_billing_name": null, 
-            "service_provider_billing_npi_number": null, 
-            "service_provider_billing_number": null, 
-            "service_provider_billing_phone": null, 
-            "service_provider_npi_number": null, 
-            "service_provider_number": null, 
-            "status": "Processed", 
-            "total_patient_responsibility": 69.11, 
-            "status": "Processed", 
+            },
+            "policy_holder_fullname": "Johnny Appleseed",
+            "policy_holder_id": 888888,
+            "processed_on": "2016-10-15",
+            "read": [],
+            "read_all": [],
+            "reduction": 0.00,
+            "remarks": null,
+            "service_provider": "Dr. Suess",
+            "service_provider_address": null,
+            "service_provider_billing_address": null,
+            "service_provider_billing_name": null,
+            "service_provider_billing_npi_number": null,
+            "service_provider_billing_number": null,
+            "service_provider_billing_phone": null,
+            "service_provider_npi_number": null,
+            "service_provider_number": null,
+            "status": "Processed",
+            "total_patient_responsibility": 69.11,
+            "status": "Processed",
             "tpafiles": [
             {
-               "extension": ".png", 
-               "tpafile_id": 99999, 
+               "extension": ".png",
+               "tpafile_id": 99999,
                "url": "/claim_medical/99999/tpafile/88888"
-            }, 
+            },
             {
-               "extension": ".pdf", 
-               "tpafile_id": 44444, 
+               "extension": ".pdf",
+               "tpafile_id": 44444,
                "url": "/claim_medical/99999/tpafile/88888"
             }
-            ], 
+            ],
             "type": {
-            "name": "dental", 
+            "name": "dental",
             "type_id": 2
-            }, 
+            },
             "vendor_system_id": "xxxxx122344"
          }
-      ], 
-      "has_next": true, 
+      ],
+      "has_next": true,
       "has_prev": false,
-      "next_num": 2, 
-      "page": 1, 
-      "pages": 9999, 
-      "per_page": 1, 
-      "prev_num": 0, 
+      "next_num": 2,
+      "page": 1,
+      "pages": 9999,
+      "per_page": 1,
+      "prev_num": 0,
       "total": 9999
       }
 
@@ -325,56 +334,56 @@ endpoints, however may or may not be enabled for each type of user.
     {
       "data": [
          {
-            "accounts": [], 
-            "alegeus_key": null, 
-            "can_request_reimbursements": false, 
-            "can_use_portal": false, 
-            "createddate": "2016-12-10T12:17:09.497104-05:00", 
-            "datapath_key": "99999", 
-            "easy_enroll_ssn_required": true, 
-            "effective_date": "2016-05-01", 
-            "email_automation": true, 
-            "employer_id": 5555555, 
-            "generic_key": null, 
-            "is_demo": false, 
-            "modifieddate": "2017-02-28T18:07:03.799519-05:00", 
-            "name": "Dunder Mifflin Paper Company", 
-            "onboard_field_send_reimbursement": "all", 
-            "onboard_url": "https://www.easyenrollment.net/enroll/ddddd", 
+            "accounts": [],
+            "alegeus_key": null,
+            "can_request_reimbursements": false,
+            "can_use_portal": false,
+            "createddate": "2016-12-10T12:17:09.497104-05:00",
+            "datapath_key": "99999",
+            "easy_enroll_ssn_required": true,
+            "effective_date": "2016-05-01",
+            "email_automation": true,
+            "employer_id": 5555555,
+            "generic_key": null,
+            "is_demo": false,
+            "modifieddate": "2017-02-28T18:07:03.799519-05:00",
+            "name": "Dunder Mifflin Paper Company",
+            "onboard_field_send_reimbursement": "all",
+            "onboard_url": "https://www.easyenrollment.net/enroll/ddddd",
             "payers": [
             {
-               "logo_url": "https://s3.amazonaws.com/tpastream-public/HorizonBlue-Logo-Updated-Jan15.jpg", 
-               "name": "Horizon Blue Cross Blue Shield of New Jersey", 
-               "payer_id": 33, 
-               "retriever": "horizon_bluecross.HorizonBlue", 
+               "logo_url": "https://s3.amazonaws.com/tpastream-public/HorizonBlue-Logo-Updated-Jan15.jpg",
+               "name": "Horizon Blue Cross Blue Shield of New Jersey",
+               "payer_id": 33,
+               "retriever": "horizon_bluecross.HorizonBlue",
                "short_name": "Horizon BCBS NJ"
             }
-            ], 
-            "send_new_claim_emails": false, 
-            "slug": "dddd", 
-            "support_email": null, 
-            "support_email_derived": "support@my-tpa.com", 
-            "support_phone": null, 
-            "support_phone_derived": "(800) 999-9999", 
-            "team_primary": null, 
-            "team_primary_id": null, 
-            "teams": [], 
+            ],
+            "send_new_claim_emails": false,
+            "slug": "dddd",
+            "support_email": null,
+            "support_email_derived": "support@my-tpa.com",
+            "support_phone": null,
+            "support_phone_derived": "(800) 999-9999",
+            "team_primary": null,
+            "team_primary_id": null,
+            "teams": [],
             "tenant": {
-            "logo_url": "https://s3.amazonaws.com/tpastream-public/xxxxxxx.png", 
-            "name": "My TPA", 
+            "logo_url": "https://s3.amazonaws.com/tpastream-public/xxxxxxx.png",
+            "name": "My TPA",
             "tenant_id": 99999
-            }, 
-            "unread_count": 333, 
+            },
+            "unread_count": 333,
             "wex_key": null
          }
 
-      ], 
-      "has_next": true, 
-      "has_prev": false, 
-      "next_num": 2, 
-      "page": 1, 
-      "pages": 66, 
-      "per_page": 1, 
-      "prev_num": 0, 
+      ],
+      "has_next": true,
+      "has_prev": false,
+      "next_num": 2,
+      "page": 1,
+      "pages": 66,
+      "per_page": 1,
+      "prev_num": 0,
       "total": 66
       }
