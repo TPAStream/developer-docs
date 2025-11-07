@@ -1,32 +1,24 @@
 # .readthedocs.yaml
-# Read the Docs configuration file
+# Read the Docs configuration file for Sphinx documentation
 # See: https://docs.readthedocs.io/en/stable/config-file/v2.html
 
 version: 2
 
-# Set the OS, Python version, and dependencies
 build:
   os: ubuntu-24.04
   tools:
     python: "3.13"
-  jobs:
-    pre_build:
-      # Optional: install system packages if needed
-      # - apt-get update && apt-get install -y graphviz
-      - echo "Starting Read the Docs build..."
 
-# Tell RTD how to install dependencies and build the docs
+# Tell Read the Docs where your Sphinx conf.py lives
 sphinx:
-  configuration: docs/conf.py # Adjust if your conf.py is elsewhere (e.g., source/conf.py)
+  configuration: source/conf.py # or docs/conf.py — adjust if needed
 
-# If your project uses pip requirements or pyproject.toml, specify here
+# Install dependencies required to build the docs
 python:
   install:
-    - requirements: requirements.txt # Optional — use if you have one
-    - method: pip
-      path: .
+    - requirements: requirements.txt # Install Sphinx + theme only
 
-# Optional: build all output formats
+# Optional: build additional formats for download
 formats:
   - htmlzip
   - pdf
