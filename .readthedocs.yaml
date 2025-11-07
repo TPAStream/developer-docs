@@ -1,0 +1,33 @@
+# .readthedocs.yaml
+# Read the Docs configuration file
+# See: https://docs.readthedocs.io/en/stable/config-file/v2.html
+
+version: 2
+
+# Set the OS, Python version, and dependencies
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.14"
+  jobs:
+    pre_build:
+      # Optional: install system packages if needed
+      # - apt-get update && apt-get install -y graphviz
+      - echo "Starting Read the Docs build..."
+
+# Tell RTD how to install dependencies and build the docs
+sphinx:
+  configuration: docs/conf.py # Adjust if your conf.py is elsewhere (e.g., source/conf.py)
+
+# If your project uses pip requirements or pyproject.toml, specify here
+python:
+  install:
+    - requirements: requirements.txt # Optional — use if you have one
+    - method: pip
+      path: .
+
+# Optional: build all output formats
+formats:
+  - htmlzip
+  - pdf
+  - epub
