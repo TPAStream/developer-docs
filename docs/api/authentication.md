@@ -43,7 +43,24 @@ each one in turn during verification, so this is the right way to
 rotate: upload the new key, leave the old one live until every client
 has switched, then delete the old key.
 
-### 3. Sign a JWT with your private key
+### 3. Add your allowed IP addresses
+
+On the same page, scroll to **Allowed IP addresses** and add **at least
+one** address or range that your requests will come from. Enter a
+single address (`203.0.113.5`) or a CIDR range (`203.0.113.0/24`);
+IPv6 works too. Click save.
+
+:::warning Required
+Requests signed with your SSH key are accepted only from an IP address
+in your list. With an empty list, **every request is refused with a
+`401`**, even when the signature is valid. The page warns you when you
+have keys but no addresses.
+:::
+
+Saving replaces the whole list, so include every address you still
+need. See [Security](/api/security) for details.
+
+### 4. Sign a JWT with your private key
 
 The JWT must be:
 
@@ -109,7 +126,7 @@ key type lives at
 [scripts/crawl/client.py:make_ssh_jwt](https://github.com/LakeEriePartners/stream/blob/master/scripts/crawl/client.py)
 in the stream repo.
 
-### 4. Make an authenticated API request
+### 5. Make an authenticated API request
 
 Include the signed token in the `Authorization` header. The scheme
 **must** be `SSH-JWT` (case-insensitive), not the `Bearer` that most
@@ -123,12 +140,6 @@ curl -L \
 ```
 
 The server verifies the signature against your registered public key.
-
-### 5. Optional IP allowlist
-
-For an additional layer of security, each user can specify an **IP
-CIDR allowlist** (for example, `10.0.0.0/8`). Requests originating
-outside this range are rejected. See [Security](/api/security).
 
 ## Common authentication mistakes
 
@@ -151,9 +162,13 @@ will tell you what's wrong. The most frequent causes:
 - **401 — JWT has expired**: `exp` is in the past relative to server
   time. If your laptop clock is drifted this can fire even on freshly
   minted tokens, so check NTP before chasing token generation.
+- **401 — IP not allowed**: the signature is valid, but the request's
+  source IP is not in your allowed IP addresses (or the list is
+  empty). Add the address at
+  [Settings > SSH Settings](https://app.tpastream.com/settings/ssh)
+  (step 3).
 - **403** with no descriptive body: authentication succeeded but the
-  request hit an IP outside your allowlist (if you configured one),
-  or the user lacks permission for the endpoint.
+  user lacks permission for the endpoint.
 - **Wrong algorithm**: the JWT `alg` header must match the key type
   you uploaded (see the table above). For example, an Ed25519 key
   paired with `RS256` will be rejected as `400 — JWT 'alg' header is
@@ -187,7 +202,7 @@ curl -L \
 
 Notes:
 
-- Basic Auth requests will be rejected if the originating IP address
-  is not in the user's allowlist.
-- You can manage allowed IP ranges on the
-  [Manage Users](https://app.tpastream.com/settings/users) page.
+- Basic Auth requests are rejected with a `401` if the originating IP
+  address is not in the user's allowed IP addresses.
+- API users manage their allowed IP ranges at
+  [Settings > Manage API Access](https://app.tpastream.com/settings/api-users).

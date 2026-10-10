@@ -39,4 +39,6 @@ To generate an SSH keypair:
 Once the keypair is created, upload the **public** half to
 [`https://app.tpastream.com/settings/ssh`](https://app.tpastream.com/settings/ssh).
 See [Authentication](/api/authentication#2-add-your-public-key-to-your-tpa-stream-account)
-for the rest of the setup.
+for the rest of the setup, including the **required** step of adding
+at least one allowed IP address on the same page. Until you do, every
+request is refused with a `401`.
