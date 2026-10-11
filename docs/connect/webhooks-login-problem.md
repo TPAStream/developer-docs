@@ -38,7 +38,7 @@ always carries a member-readable explanation.
 
 ## Configuring the URL
 
-Your TPA Stream administrator sets the destination URL under Settings > Webhook Settings and can replay a delivery from the claims page. Step-by-step (requires a TPA Stream login): https://support.tpastream.com/kb/setting-up-webhooks
+Your TPA Stream administrator sets the destination URL under Settings > Webhook Settings. Step-by-step (requires a TPA Stream login): https://support.tpastream.com/kb/setting-up-webhooks
 
 ## Request shape
 

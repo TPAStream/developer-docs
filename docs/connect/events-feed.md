@@ -119,8 +119,8 @@ Guarantees to build against:
 
 ## Relationship to webhook replays
 
-Manually replayed webhooks (for example a replay from the claims page, described in the
-[setup article](https://support.tpastream.com/kb/setting-up-webhooks), which
-requires a TPA Stream login)
-re-send the webhook only — they do **not** create new feed events,
+Manually replayed webhooks (a claim replay from the claims page, or a
+crawl completion replay from the Policy Holders page; see the
+[setup article](https://support.tpastream.com/kb/setting-up-webhooks),
+which requires a TPA Stream login) re-send the webhook only — they do **not** create new feed events,
 since the original occurrence is already recorded.
