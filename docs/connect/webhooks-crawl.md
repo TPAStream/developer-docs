@@ -28,18 +28,11 @@ underlying carrier login (policy holder) is reused.
 
 ## Configuring the URL
 
-To edit the URL, open **Account Settings** on the settings page, just
-like the [Claim Webhook URL](/connect/webhooks-claim#configuring-the-url).
+Your TPA Stream administrator sets the destination URL under Settings > Webhook Settings and can replay a delivery from the Policy Holders page. Step-by-step (requires a TPA Stream login): https://support.tpastream.com/kb/setting-up-webhooks
 
 ## Replaying a crawl completion post
 
-To manually replay a first-completion webhook post, open the
-**Policy Holders** page, find the policy holder, and pick
-**Retry First Crawl Completion Webhook** from the row action menu.
-If the option isn't shown, verify that the feature is enabled and a
-URL is set.
-
-The replay is useful for testing. If a crawl for that policy holder
+A replay is useful for testing. If a crawl for that policy holder
 has not happened yet, the replay returns a failure. Note: replayed
 posts do not carry `crawl_claim_ids` and are **not retried on
 failure**.
