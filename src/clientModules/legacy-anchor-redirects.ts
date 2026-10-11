@@ -64,7 +64,7 @@ const PAGE_TO_ANCHOR_MAP: AnchorMap = {
     webhooks: "/connect/webhooks-claim",
     "claim-webhook": "/connect/webhooks-claim",
     "claim-webhook-url": "/connect/webhooks-claim#configuring-the-url",
-    "replaying-a-claim-post": "/connect/webhooks-claim#replaying-a-claim-post",
+    "replaying-a-claim-post": "/connect/webhooks-claim#configuring-the-url",
     "first-crawl-completion-webhook": "/connect/webhooks-crawl",
     "first-crawl-completion-webhook-url":
       "/connect/webhooks-crawl#configuring-the-url",

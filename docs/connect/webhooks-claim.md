@@ -14,22 +14,7 @@ Stream.
 
 ## Configuring the URL
 
-To edit the claim webhook URL, open **Account Settings** on the
-settings page.
-
-You'll only see this setting if the claim webhook feature is enabled
-on your account. Once the webhook URL is set, all future posts go to
-that URL.
-
-## Replaying a claim post
-
-To manually replay a claim post, find the claim on the claims page
-and click **Replay webhook**. If the button isn't shown, verify that
-the webhook feature is enabled and a URL is set.
-
-The replay is useful for testing, and also for triggering webhooks
-against pre-existing claims that were ingested before you wired up
-your endpoint.
+Your TPA Stream administrator sets the destination URL under Settings > Webhook Settings and can replay a delivery from the claims page. Step-by-step (requires a TPA Stream login): https://support.tpastream.com/kb/setting-up-webhooks
 
 ## Request shape
 
