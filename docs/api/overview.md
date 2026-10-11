@@ -23,8 +23,11 @@ The REST API supports **two** authentication methods:
 
 | Method | Status | Performance | Notes |
 |---|---|---|---|
-| **SSH-JWT** | Recommended | Fast | Modern, key-based authentication |
-| **API Token (Basic Auth)** | Deprecated | Slower | Supported for backwards compatibility |
+| **SSH-JWT** | Recommended | Fast | Modern, key-based authentication. Add keys under avatar menu → **SSH keys & API access** |
+| **API Token (Basic Auth)** | Legacy | Slower | Existing tokens keep working; new tokens are no longer issued |
+
+For an integration rather than a person, use a
+[service account](/api/service-accounts) with its own SSH key.
 
 See [Authentication](/api/authentication) for the setup walkthrough
 and the troubleshooting table.
@@ -33,11 +36,12 @@ and the troubleshooting table.
 
 - [Authentication](/api/authentication) — set up SSH-JWT, sign your
   first request, troubleshoot common 4xx responses.
+- [Service accounts](/api/service-accounts) — a separate account and
+  SSH key for an integration.
 - [Pagination](/api/pagination) — the envelope shape and how to walk
   through pages.
 - [Security](/api/security) — IP allowlists.
 - [Generating an SSH Key](/api/ssh-keys) — copy-paste-able commands
   for Ed25519, RSA, and ECDSA.
-- [Generating a GPG Key](/api/gpg-keys) — for signed deliverables.
 - [A Note About Date Ranges](/api/date-ranges) — how range-typed
   fields like `date_of_service` are serialized.

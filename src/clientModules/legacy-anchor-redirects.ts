@@ -24,13 +24,14 @@ type AnchorMap = Record<string, Record<string, string>>;
 const PAGE_TO_ANCHOR_MAP: AnchorMap = {
   // Old /api.html anchors that are now their own pages.
   "/api/overview": {
-    "ssh-jwt-preferred": "/api/authentication#ssh-jwt-preferred",
+    "ssh-jwt-preferred": "/api/authentication#ssh-jwt",
     "api-tokens-legacy": "/api/authentication#api-tokens-legacy",
     "common-mistakes": "/api/authentication#common-authentication-mistakes",
     pagination: "/api/pagination",
     security: "/api/security",
     "generating-an-ssh-key": "/api/ssh-keys",
-    "generating-a-gpg-key": "/api/gpg-keys",
+    // The GPG key page was removed (the feature was never used).
+    "generating-a-gpg-key": "/api/ssh-keys",
     "a-note-about-date-ranges": "/api/date-ranges",
     authentication: "/api/authentication",
   },

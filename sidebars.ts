@@ -39,10 +39,10 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         "api/authentication",
+        "api/service-accounts",
         "api/pagination",
         "api/security",
         "api/ssh-keys",
-        "api/gpg-keys",
         "api/date-ranges",
         "api/claim-types",
       ],
