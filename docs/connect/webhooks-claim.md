@@ -17,15 +17,11 @@ Stream.
 To edit the claim webhook URL, open **Account Settings** on the
 settings page.
 
-<img src="https://tpastream-public.s3.amazonaws.com/webapp-docs/settings/account-settings.png" alt="Account settings" width="700" />
-
 You'll only see this setting if the claim webhook feature is enabled
 on your account. Once the webhook URL is set, all future posts go to
 that URL.
 
 ## Replaying a claim post
-
-<img src="https://tpastream-public.s3.amazonaws.com/webapp-docs/claims/replay-claim-webhook.png" alt="Replay claim webhook" width="700" />
 
 To manually replay a claim post, find the claim on the claims page
 and click **Replay webhook**. If the button isn't shown, verify that

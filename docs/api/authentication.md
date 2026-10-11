@@ -3,40 +3,34 @@ title: Authentication
 sidebar_label: Authentication
 ---
 
+{/* The heading anchors on this page are linked from the TPA Stream app. Keep them stable. */}
+
 # Authentication
 
-## SSH-JWT (preferred)
+## SSH-JWT (preferred) {#ssh-jwt}
+
+<a id="ssh-jwt-preferred"></a>
 
 SSH-JWT is the **modern and preferred** way to authenticate with the
 TPA Stream API.
 
+:::tip Authenticating as an integration rather than a person?
+Use a [service account](/api/service-accounts). It is a separate
+account for the integration, with its own SSH keys and allowed IP
+addresses, so it keeps working when staff change and shows up in the
+audit log as the integration.
+:::
+
 ### 1. Generate an SSH keypair
 
-Run one of the following in your terminal (Linux, macOS, or Git Bash
-on Windows):
-
-```bash
-ssh-keygen -t ed25519              # recommended for new keys
-ssh-keygen -t rsa -b 4096          # broadly compatible
-ssh-keygen -t ecdsa -b 521         # NIST P-521
-```
-
-- When prompted for a file path, press Enter to accept the default.
-- You may optionally set a passphrase.
-
-See [Generating an SSH Key](/api/ssh-keys) for the full prompt
-walk-through.
+Generate an RSA, Ed25519, or ECDSA keypair as described in
+[Generating an SSH Key](/api/ssh-keys).
 
 ### 2. Add your public key to your TPA Stream account
 
-Visit your account settings at:
-
-```
-https://app.tpastream.com/settings/ssh
-```
-
-Paste the contents of your **public key file** (for example,
-`~/.ssh/id_ed25519.pub` or `~/.ssh/id_rsa.pub`).
+Upload the public key (for example `~/.ssh/id_ed25519.pub`) from the
+avatar menu → **SSH keys & API access** → **New SSH key**
+([`https://app.tpastream.com/d/account/access`](https://app.tpastream.com/d/account/access)).
 
 You can upload **multiple keys** to the same account. The server tries
 each one in turn during verification, so this is the right way to
@@ -45,10 +39,9 @@ has switched, then delete the old key.
 
 ### 3. Add your allowed IP addresses
 
-On the same page, scroll to **Allowed IP addresses** and add **at least
-one** address or range that your requests will come from. Enter a
-single address (`203.0.113.5`) or a CIDR range (`203.0.113.0/24`);
-IPv6 works too. Click save.
+Add at least one address or CIDR range your requests will come from
+in the **Allowed IP addresses** section of the same
+[API access](https://app.tpastream.com/d/account/access) page.
 
 :::warning Required
 Requests signed with your SSH key are accepted only from an IP address
@@ -57,8 +50,7 @@ in your list. With an empty list, **every request is refused with a
 have keys but no addresses.
 :::
 
-Saving replaces the whole list, so include every address you still
-need. See [Security](/api/security) for details.
+See [Security](/api/security#ip-allowlist) for details.
 
 ### 4. Sign a JWT with your private key
 
@@ -89,42 +81,56 @@ You can reuse the same signed token across as many requests as you
 like until `exp` lapses; each request stamps `last_accessed` on the
 matching key but does not consume the token.
 
-Minimum working example in Python (`pyjwt` + `cryptography`):
+Complete working example in Python (`pip install pyjwt cryptography
+requests`). It loads an Ed25519 or RSA private key, signs a token
+that is valid for 15 minutes, and makes one request:
 
 ```python
 import time
-import jwt
-from cryptography.hazmat.primitives import serialization
 
-with open("/path/to/id_ed25519", "rb") as fh:
-    private_key = serialization.load_ssh_private_key(
-        fh.read(), password=None
-    )
+import jwt
+import requests
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import ed25519, rsa
+
+EMAIL = "you@example.com"  # the email on your TPA Stream account
+KEY_PATH = "/path/to/id_ed25519"  # or /path/to/id_rsa
+
+with open(KEY_PATH, "rb") as fh:
+    data = fh.read()
+
+# ssh-keygen writes "-----BEGIN OPENSSH PRIVATE KEY-----" files, which
+# need load_ssh_private_key; PEM files need load_pem_private_key.
+if b"OPENSSH PRIVATE KEY" in data:
+    private_key = serialization.load_ssh_private_key(data, password=None)
+else:
+    private_key = serialization.load_pem_private_key(data, password=None)
+
+if isinstance(private_key, ed25519.Ed25519PrivateKey):
+    algorithm = "EdDSA"
+elif isinstance(private_key, rsa.RSAPrivateKey):
+    algorithm = "RS256"
+else:
+    raise ValueError("this example handles Ed25519 and RSA keys only")
 
 now = int(time.time())
 token = jwt.encode(
-    {
-        "email": "you@example.com",
-        "iat": now,
-        "exp": now + 900,  # 15 minutes
-    },
+    {"email": EMAIL, "iat": now, "exp": now + 15 * 60},
     private_key,
-    algorithm="EdDSA",  # RS256 for RSA, ES256/ES384/ES512 for ECDSA P-256/P-384/P-521
+    algorithm=algorithm,
 )
+
+response = requests.get(
+    "https://app.tpastream.com/api/claims",
+    headers={"Authorization": f"SSH-JWT {token}"},
+)
+response.raise_for_status()
+print(response.json())
 ```
 
-The `serialization.load_ssh_private_key` step handles keys generated
-by modern `ssh-keygen`, which writes the OpenSSH
-`-----BEGIN OPENSSH PRIVATE KEY-----` format that PyJWT cannot parse
-directly. If your file already starts with `-----BEGIN PRIVATE KEY-----`
-or `-----BEGIN RSA PRIVATE KEY-----` (PEM), you can pass
-`open(...).read()` straight to `jwt.encode` and skip the load step.
-To convert in place: `ssh-keygen -p -m PEM -f ~/.ssh/id_rsa`.
-
-A reference implementation that autodetects the algorithm from the
-key type lives at
-[scripts/crawl/client.py:make_ssh_jwt](https://github.com/LakeEriePartners/stream/blob/master/scripts/crawl/client.py)
-in the stream repo.
+If your key file is passphrase-protected, pass the passphrase as bytes
+in `password=`. For an ECDSA key, use `ES256`, `ES384`, or `ES512` to
+match the curve (see the table above).
 
 ### 5. Make an authenticated API request
 
@@ -141,7 +147,7 @@ curl -L \
 
 The server verifies the signature against your registered public key.
 
-## Common authentication mistakes
+## Common authentication mistakes {#common-authentication-mistakes}
 
 If your request returns a 4xx, the response body's `message` field
 will tell you what's wrong. The most frequent causes:
@@ -164,9 +170,9 @@ will tell you what's wrong. The most frequent causes:
   minted tokens, so check NTP before chasing token generation.
 - **401 — IP not allowed**: the signature is valid, but the request's
   source IP is not in your allowed IP addresses (or the list is
-  empty). Add the address at
-  [Settings > SSH Settings](https://app.tpastream.com/settings/ssh)
-  (step 3).
+  empty). Add the address under **Allowed IP addresses** on the
+  [API access](https://app.tpastream.com/d/account/access) page
+  (avatar menu → **SSH keys & API access**; step 3).
 - **403** with no descriptive body: authentication succeeded but the
   user lacks permission for the endpoint.
 - **Wrong algorithm**: the JWT `alg` header must match the key type
@@ -179,11 +185,17 @@ will tell you what's wrong. The most frequent causes:
   upload time. If you generated a DSA key, regenerate with one of the
   supported types (`ssh-keygen -t ed25519` is the modern default).
 
-## API tokens (legacy)
+## API tokens (legacy) {#api-tokens-legacy}
 
 API tokens (HTTP Basic Auth) are still supported for older
-integrations but are **deprecated**. We recommend migrating to
-SSH-JWT for improved performance and security.
+integrations but are **legacy**. Tokens are no longer issued, and you
+cannot create or rotate one yourself. Existing tokens keep working.
+
+To rotate or replace a token, switch the integration to a
+[service account](/api/service-accounts) with an SSH key, which
+authenticates with SSH-JWT as described above. If an integration
+cannot adopt SSH keys yet, contact TPA Stream support: only TPA Stream
+staff can issue a token, on request, for that case.
 
 To use Basic authentication:
 
@@ -204,5 +216,6 @@ Notes:
 
 - Basic Auth requests are rejected with a `401` if the originating IP
   address is not in the user's allowed IP addresses.
-- API users manage their allowed IP ranges at
-  [Settings > Manage API Access](https://app.tpastream.com/settings/api-users).
+- An administrator manages the account's allowed IP addresses under
+  **Manage Users** → the account's **API access** tab
+  ([`https://app.tpastream.com/d/manage-users?includeApiUsers=true`](https://app.tpastream.com/d/manage-users?includeApiUsers=true)).

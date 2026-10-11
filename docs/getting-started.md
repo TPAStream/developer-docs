@@ -34,5 +34,5 @@ There are several ways to get claim data into your application:
 - **Pull on demand** — use the
   [REST API](/api/overview).
 - **Daily CSV feed** — TPA Stream can set up a daily file feed via
-  sFTP, FTPS, or to an S3 bucket. Contact
-  [sales@tpastream.com](mailto:sales@tpastream.com) to enable.
+  sFTP, FTPS, or to an S3 bucket. Your
+  TPA Stream account team sets this up.
