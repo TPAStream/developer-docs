@@ -218,4 +218,4 @@ Notes:
   address is not in the user's allowed IP addresses.
 - An administrator manages the account's allowed IP addresses under
   **Manage Users** → the account's **API access** tab
-  ([`https://app.tpastream.com/d/manage-users?includeApiUsers=true`](https://app.tpastream.com/d/manage-users?includeApiUsers=true)).
+  ([`https://app.tpastream.com/d/manage-users?includeServiceAccounts=true`](https://app.tpastream.com/d/manage-users?includeServiceAccounts=true)).
