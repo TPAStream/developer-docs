@@ -41,10 +41,13 @@ person's account is deactivated.
 
 ## Create a service account (administrator) {#create-a-service-account}
 
-An administrator creates the account in **Manage Users**
-(**New service account**), then adds the integration's public key and
-allowed IP addresses on its **API access** tab. Step-by-step with
-screenshots:
+If you are an administrator, open
+[https://app.tpastream.com/d/manage-users/new?kind=service](https://app.tpastream.com/d/manage-users/new?kind=service)
+to go straight to the new-service-account form. Alternatively, create the
+account in **Manage Users** (**New service account**).
+
+Then add the integration's public key and allowed IP addresses on the
+account's **API access** tab. Step-by-step with screenshots:
 [https://support.tpastream.com/kb/giving-an-integration-api-access](https://support.tpastream.com/kb/giving-an-integration-api-access)
 (requires a TPA Stream login).
 
