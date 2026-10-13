@@ -89,8 +89,10 @@ For **local development**:
 ## Per-key allowlist (optional)
 
 The policy above applies to every key. You can also restrict an
-individual key to your own websites. In the TPA Stream admin UI each
-Connect key has two settings:
+individual key to your own websites. Only TPA Stream staff can change
+these settings, so to turn this on, ask TPA Stream support to enable it
+for your key and tell them the list of origins and the mode you want.
+Each Connect key has two settings:
 
 * **Embed origins**: a list of origins, such as
   `https://benefits.example.com` or `https://*.example.com`.
@@ -108,11 +110,13 @@ recognised, and uses the browser's `Origin` header. Requests with no
 preflight (`OPTIONS`) requests are not checked.
 
 We suggest rolling out in three steps: leave the key on `off` while you
-list every site that embeds the SDK, switch to `report` for about a
-week and review what was logged, then switch to `enforce`.
+list every site that embeds the SDK, ask support to switch to `report`
+for about a week and review what was logged, then ask support to switch
+to `enforce`.
 
-* `https://*.example.com` matches subdomains. List the bare
-  `https://example.com` separately if you need it.
+* `https://*.example.com` matches subdomains and never matches the
+  bare `https://example.com`. List the bare origin separately if you
+  need it.
 * Local development origins such as `http://localhost:3000` must be
   listed too, including the port.
 * This limits which websites can use a key from a browser. It does not
@@ -121,8 +125,9 @@ week and review what was logged, then switch to `enforce`.
   [connect access tokens](/connect-api/authentication#your-two-keys)
   from your secret key instead.
 
-If a request is rejected with `origin_not_allowed`, add the site's
-origin to the key's embed origins, or set the mode back to `report`.
+If a request is rejected with `origin_not_allowed`, ask support to add
+the site's origin to the key's embed origins, or to set the mode back
+to `report`.
 
 ## Related
 
