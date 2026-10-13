@@ -86,6 +86,44 @@ For **local development**:
   or run a local TLS proxy (Caddy, `mkcert` + a tiny nginx) in front
   of the dev server.
 
+## Per-key allowlist (optional)
+
+The policy above applies to every key. You can also restrict an
+individual key to your own websites. In the TPA Stream admin UI each
+Connect key has two settings:
+
+* **Embed origins**: a list of origins, such as
+  `https://benefits.example.com` or `https://*.example.com`.
+* **Mode**: `off`, `report` or `enforce`.
+
+| Mode | A browser request from an origin not on the list |
+|---|---|
+| `off` (default) | Nothing changes. The list is ignored. |
+| `report` | The request succeeds and TPA Stream logs it, so you can see what enforcement would block. |
+| `enforce` | The request fails with HTTP 403 and `{"error_code": "origin_not_allowed", "docs_url": "..."}`. The response carries normal CORS headers so your page can read it. |
+
+The check runs on every request that carries the key, after the key is
+recognised, and uses the browser's `Origin` header. Requests with no
+`Origin` header (server-to-server calls) are never affected, and CORS
+preflight (`OPTIONS`) requests are not checked.
+
+We suggest rolling out in three steps: leave the key on `off` while you
+list every site that embeds the SDK, switch to `report` for about a
+week and review what was logged, then switch to `enforce`.
+
+* `https://*.example.com` matches subdomains. List the bare
+  `https://example.com` separately if you need it.
+* Local development origins such as `http://localhost:3000` must be
+  listed too, including the port.
+* This limits which websites can use a key from a browser. It does not
+  protect a key used from a server, because server callers send no
+  `Origin` header. For server use, mint
+  [connect access tokens](/connect-api/authentication#your-two-keys)
+  from your secret key instead.
+
+If a request is rejected with `origin_not_allowed`, add the site's
+origin to the key's embed origins, or set the mode back to `report`.
+
 ## Related
 
 * [SDK Quickstart](/connect/quickstart) — the smallest possible

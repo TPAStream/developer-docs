@@ -113,6 +113,15 @@ demand when you see `expired_connect_token`, is simpler than tracking
 expiry and costs one extra request.
 :::
 
+## Origin allowlist
+
+A key can optionally carry an
+[embed origin allowlist](/connect/origin-policy#per-key-allowlist-optional)
+that rejects browser requests from other websites with
+`403` and `"error_code": "origin_not_allowed"`. Server-side callers are
+unaffected: the check uses the browser's `Origin` header, which your
+backend does not send, so you do not need to change anything.
+
 ## Do not share an HTTP client cookie jar
 
 This is the single most important operational detail on this page.
